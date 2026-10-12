@@ -18,7 +18,11 @@ use jni_sys::{jboolean, jint, jobject, jvalue, JNIEnv, JavaVM, JNI_TRUE};
 use std::ffi::{c_void, CStr};
 use std::ptr::null_mut;
 
-pub const URL: &CStr = c"https://m.youtube.com/";
+/// `app=m` forces YouTube's mobile site even when Chrome requests desktop sites
+/// (Chrome's default on tablets): without it YouTube redirects to the desktop
+/// site, which ships ~7x more JavaScript. `persist_app=1` stores the choice in
+/// YouTube's PREF cookie so later navigations stay on the mobile site.
+pub const URL: &CStr = c"https://m.youtube.com/?app=m&persist_app=1";
 const CHROME: &CStr = c"com.android.chrome";
 const ACTION_VIEW: &CStr = c"android.intent.action.VIEW";
 /// Presence of this extra (even with a null binder) makes the intent a Custom Tab.
@@ -276,7 +280,10 @@ mod tests {
 
     #[test]
     fn constants() {
-        assert_eq!(URL.to_str().unwrap(), "https://m.youtube.com/");
+        assert_eq!(
+            URL.to_str().unwrap(),
+            "https://m.youtube.com/?app=m&persist_app=1"
+        );
         assert_eq!(
             TOOLBAR_COLOR as jint, -15_790_321,
             "ARGB packs into a negative Java int"

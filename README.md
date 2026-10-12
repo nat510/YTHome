@@ -23,6 +23,10 @@ YTHome is a **simple web-page frame**. Tapping the icon opens **m.youtube.com** 
   m.youtube.com in Chrome.
 - **More room for video**: the toolbar slides away while you scroll down, the share button
   and page-title line are turned off, and the toolbar is dark to match YouTube.
+- **Always the light mobile site**: YTHome opens `m.youtube.com/?app=m&persist_app=1`.
+  Chrome asks for desktop sites by default on tablets, and YouTube then redirects to its
+  desktop site, which ships about 7× more JavaScript (~10.8 MB vs ~1.6 MB). `app=m` keeps
+  the mobile site and `persist_app=1` makes it stick.
 - **Nothing in between**: everything you see is YouTube's own mobile website running in
   Chrome. The app does not download, modify or block anything, and it does not collect any
   data. It exits right after opening the page.
@@ -67,7 +71,7 @@ The APK contains **no Java code**. `AndroidManifest.xml` declares `android:hasCo
 and uses Android's built-in `android.app.NativeActivity`, which loads `libythome.so` (Rust,
 `rust/src/lib.rs`). Its `ANativeActivity_onCreate` uses JNI to:
 
-1. build `Intent(ACTION_VIEW, "https://m.youtube.com/")` with the standard Custom Tabs
+1. build `Intent(ACTION_VIEW, "https://m.youtube.com/?app=m&persist_app=1")` with the standard Custom Tabs
    extras (session, toolbar hiding on scroll, toolbar colour, share off, no title);
 2. start it with package `com.android.chrome`, falling back to the default browser;
 3. finish itself.
