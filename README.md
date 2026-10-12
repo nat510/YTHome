@@ -89,6 +89,12 @@ keyPassword=...
 Without it, the build produces `YTHome-<version>-release-unsigned.apk` and a debug APK
 signed with your local Android debug key.
 
+## License
+
+YTHome is free software, licensed under the **GNU General Public License v3.0 only**
+(`GPL-3.0-only`). See [LICENSE](LICENSE). You may use, study, share and modify it; if you
+distribute modified versions, they must be released under the same license with source code.
+
 ## Disclaimer
 
 YTHome is an independent project, not affiliated with or endorsed by Google or YouTube.

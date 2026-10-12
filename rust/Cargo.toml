@@ -3,6 +3,7 @@ name = "ythome"
 version = "0.1.0"
 edition = "2021"
 description = "Opens m.youtube.com in a Chrome Custom Tab from a pure-native Android activity"
+license = "GPL-3.0-only"
 publish = false
 
 [lib]
