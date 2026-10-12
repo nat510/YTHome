@@ -91,9 +91,13 @@ signed with your local Android debug key.
 
 ## License
 
-YTHome is free software, licensed under the **GNU General Public License v3.0 only**
-(`GPL-3.0-only`). See [LICENSE](LICENSE). You may use, study, share and modify it; if you
-distribute modified versions, they must be released under the same license with source code.
+YTHome is free software: you can redistribute it and/or modify it under the terms of the
+**GNU General Public License** as published by the Free Software Foundation, either
+**version 3** of the License, or (at your option) **any later version**
+(`GPL-3.0-or-later`). See [LICENSE](LICENSE).
+
+If you distribute modified versions, they must be released under the same license, with
+source code. YTHome is distributed WITHOUT ANY WARRANTY.
 
 ## Disclaimer
 

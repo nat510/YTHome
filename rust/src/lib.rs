@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-3.0-only
+// SPDX-License-Identifier: GPL-3.0-or-later
 // Copyright (C) 2026 nat510
 
 //! YTHome: a launcher icon that opens m.youtube.com in a Chrome Custom Tab.
