@@ -36,6 +36,18 @@ YouTube API.
 - **Google Chrome** installed. Without Chrome the page opens in the default browser instead.
 - Sign in to YouTube once in Chrome; YTHome uses that session.
 
+## Install
+
+1. Download an APK from [Releases](https://github.com/nat510/YTHome/releases/latest):
+   - **`YTHome-<version>-universal.apk`**: recommended; works on every supported device.
+   - `YTHome-<version>-arm32.apk`: only for 32-bit devices (`armeabi-v7a`).
+   - `YTHome-<version>-arm64.apk`: only for 64-bit devices (`arm64-v8a`).
+
+   All three behave and perform the same; the per-architecture files are just smaller.
+   If unsure, use the universal one.
+2. Open the file on the device and allow installing from this source ("Unknown sources").
+3. Sign in to YouTube in Chrome once, then tap the **YT Home** icon.
+
 ## Limits
 
 These come from how Android and Chrome work, not from this app:

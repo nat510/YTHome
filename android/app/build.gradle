@@ -22,9 +22,16 @@ android {
         targetSdk 34
         versionCode 1
         versionName '0.1'
-        ndk {
-            // 32-bit and 64-bit ARM devices from one APK.
-            abiFilters 'armeabi-v7a', 'arm64-v8a'
+    }
+
+    // One APK per ABI plus a universal APK containing both. Android picks the
+    // matching native library from the universal APK automatically.
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'armeabi-v7a', 'arm64-v8a'
+            universalApk true
         }
     }
 

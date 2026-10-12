@@ -48,12 +48,13 @@ esac
 
 mkdir -p "$ROOT/outputs"
 VER="$(sed -n "s/.*versionName '\(.*\)'.*/\1/p" app/build.gradle)"
-for f in app/build/outputs/apk/debug/app-debug.apk; do
-  [ -f "$f" ] && cp "$f" "$ROOT/outputs/YTHome-$VER-debug.apk"
+# Gradle ABI splits: app-{universal,armeabi-v7a,arm64-v8a}-<type>[-unsigned].apk
+for f in app/build/outputs/apk/*/app-*.apk; do
+  [ -f "$f" ] || continue
+  name="$(basename "$f" .apk)"
+  name="${name#app-}"
+  name="${name/armeabi-v7a/arm32}"
+  name="${name/arm64-v8a/arm64}"
+  cp "$f" "$ROOT/outputs/YTHome-$VER-$name.apk"
 done
-if [ -f app/build/outputs/apk/release/app-release.apk ]; then
-  cp app/build/outputs/apk/release/app-release.apk "$ROOT/outputs/YTHome-$VER-release.apk"
-elif [ -f app/build/outputs/apk/release/app-release-unsigned.apk ]; then
-  cp app/build/outputs/apk/release/app-release-unsigned.apk "$ROOT/outputs/YTHome-$VER-release-unsigned.apk"
-fi
 ls -l "$ROOT/outputs"
