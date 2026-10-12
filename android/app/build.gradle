@@ -1,0 +1,68 @@
+plugins {
+    id 'com.android.application'
+}
+
+// Optional user-controlled release signing (android/keystore.properties is
+// git-ignored). Without it, assembleRelease produces an unsigned APK.
+def keystoreProps = new Properties()
+def keystoreFile = rootProject.file('keystore.properties')
+if (keystoreFile.exists()) {
+    keystoreFile.withInputStream { keystoreProps.load(it) }
+}
+
+android {
+    namespace 'app.ythome'
+    compileSdk 35
+    buildToolsVersion '35.0.0'
+    ndkVersion '27.2.12479018'
+
+    defaultConfig {
+        applicationId 'app.ythome'
+        minSdk 23
+        targetSdk 34
+        versionCode 1
+        versionName '0.1'
+        ndk {
+            // 32-bit and 64-bit ARM devices from one APK.
+            abiFilters 'armeabi-v7a', 'arm64-v8a'
+        }
+    }
+
+    signingConfigs {
+        if (keystoreProps['storeFile']) {
+            release {
+                storeFile file(keystoreProps['storeFile'])
+                storePassword keystoreProps['storePassword']
+                keyAlias keystoreProps['keyAlias']
+                keyPassword keystoreProps['keyPassword']
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            // No Java/Kotlin code to shrink (hasCode=false).
+            minifyEnabled false
+            if (keystoreProps['storeFile']) {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+
+    lint {
+        abortOnError true
+        checkReleaseBuilds true
+    }
+}
+
+// The Rust library must be built first (scripts/build.sh).
+tasks.named('preBuild') {
+    doFirst {
+        ['armeabi-v7a', 'arm64-v8a'].each { abi ->
+            def so = file("src/main/jniLibs/${abi}/libythome.so")
+            if (!so.exists()) {
+                throw new GradleException("Missing ${so} — run scripts/build.sh first")
+            }
+        }
+    }
+}

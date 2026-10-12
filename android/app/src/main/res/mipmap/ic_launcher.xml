@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Launcher icon (API 23-25): red rounded square with a white home glyph. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp" android:height="48dp"
+    android:viewportWidth="48" android:viewportHeight="48">
+    <path android:fillColor="@color/icon_bg" android:pathData="M12,2h24a10,10 0,0 1,10 10v24a10,10 0,0 1,-10 10h-24a10,10 0,0 1,-10 -10v-24a10,10 0,0 1,10 -10z" />
+    <group android:scaleX="1.2" android:scaleY="1.2" android:translateX="9.6" android:translateY="10.2">
+        <path android:fillColor="#FFFFFFFF" android:pathData="M10,20v-6h4v6h5v-8h3L12,3 2,12h3v8z" />
+    </group>
+</vector>
